@@ -34,13 +34,15 @@ async function run() {
     await client.connect();
 
 
-    const db = client.db("CoffeeShop");
+    const db = client.db("CoffeeShopDB");
     const coffeeCollection = db.collection("coffees");
 
-    app.post('/addcoffee', async (req, res) => {
-      const result = await coffeeCollection.insertOne(req.body);
+    app.post('/coffee', async (req, res) => {
+      const newCoffee = req.body;
+      console.log(newCoffee);
+      const result = await coffeeCollection.insertOne(newCoffee);
       res.send(result);
-    })
+  })
 
 
 
@@ -49,15 +51,10 @@ async function run() {
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
-
-
-
-
-
 
 
 

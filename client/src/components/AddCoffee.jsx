@@ -9,10 +9,11 @@ const AddCoffee = () => {
         const price = event.target.coffeePrice.value;
         const quantity = event.target.coffeeQuantity.value;
         const photoURL = event.target.coffeePhotoURL.value;
-        fetch("http://localhost:5000/addcoffee",{
+        const coffee = {name, price, quantity, photoURL}
+        fetch("http://localhost:5000/coffee",{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({name, price, quantity, photoURL})
+            body: JSON.stringify(coffee)
         }).then(response => response.json())  // assuming the server responds with JSON
         .then(data => {
             // Do something with the response data
