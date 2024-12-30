@@ -37,6 +37,12 @@ async function run() {
     const db = client.db("CoffeeShopDB");
     const coffeeCollection = db.collection("coffees");
 
+    app.get('/coffees', async(req, res) => {
+      const coffees = await coffeeCollection.find().toArray();
+      res.send(coffees);
+    })
+
+
     app.post('/coffee', async (req, res) => {
       const newCoffee = req.body;
       console.log(newCoffee);

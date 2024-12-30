@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Swal from 'sweetalert2'
 const AddCoffee = () => {
 
 
@@ -16,8 +16,19 @@ const AddCoffee = () => {
             body: JSON.stringify(coffee)
         }).then(response => response.json())  // assuming the server responds with JSON
         .then(data => {
-            // Do something with the response data
-            console.log(data);
+          
+            if (data.insertedId) {
+                console.log('successfully added');
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Coffee added successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                });
+                e.target.reset();
+
+            }
+            
         })
         .catch(error => {
             console.error('Error:', error);
